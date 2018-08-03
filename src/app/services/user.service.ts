@@ -12,8 +12,17 @@ export class UserService {
 
   constructor(private http : HttpClient) { }
 
-  getUser():Observable<any>{
+  getUsers():Observable<any>{
     return this.http.get(`${this.url}/users?per_page=6`)
+    .pipe(
+      map((result:any) => {
+        return result.data
+      })
+    );
+  }
+
+  getUser(id:string):Observable<any>{
+    return this.http.get(`${this.url}/users/${id}`)
     .pipe(
       map((result:any) => {
         return result.data
